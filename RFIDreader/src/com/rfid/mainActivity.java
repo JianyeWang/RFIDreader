@@ -3,7 +3,9 @@ package com.rfid;
 import com.thingmagic.*;
 
 public class mainActivity {
+	//connecting uri
 	private static String uriString = "tmr:///dev/cu.usbserial-A402JMEX";
+	private static Calculater cal = new Calculater();
 	
 	static void usage()
 	  {
@@ -92,7 +94,8 @@ public class mainActivity {
 	        // Print tag reads
 	        for (TagReadData tr : tagReads)
 	        {
-	            System.out.println(tr.toString());
+	        	double distance = cal.calDistanceByRSSI(tr.getRssi());
+	            System.out.println(tr.toString()+" RSSI: "+tr.getRssi()+"  Distance is :"+distance);
 	        }
 
 	        // Shut down reader
@@ -135,4 +138,44 @@ public class mainActivity {
         }
         return antennaList;
     }	
+	
+	public static void memReadWords(Reader r, String args[])
+	  {
+//	    TagFilter target;
+//	    int bank, address, count;
+//	    short[] values;
+//
+//	    bank = Integer.decode(args[0]);
+//	    address = Integer.decode(args[1]);
+//	    count = Integer.decode(args[2]);
+//
+//	    if (args.length > 3)
+//	      target = (TagFilter)parseValue(args[3]);
+//	    else
+//	      target = select;
+//
+//	    try
+//	    {
+//	      if(r instanceof SerialReader || r instanceof RqlReader)
+//	      {
+//	      values = r.readTagMemWords(target, bank, address, count);
+//	      }
+//	      else
+//	      {
+//	          Gen2.ReadData rData = new Gen2.ReadData(Gen2.Bank.getBank(bank), address, (byte)count);
+//	          values = (short[])r.executeTagOp(rData, target);
+//	      }
+//	      System.out.printf("words:");
+//	      for (int i = 0; i < values.length; i++)
+//	      {
+//	        System.out.printf("%04x", values[i]);
+//	      }
+//	      System.out.printf("\n");
+//	    }
+//	    catch (ReaderException re)
+//	    {
+//	      System.out.printf("Error reading memory of tag: %s\n",
+//	                        re.getMessage());
+//	    }
+	  }
 }
