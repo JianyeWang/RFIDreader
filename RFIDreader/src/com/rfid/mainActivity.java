@@ -1,5 +1,7 @@
 package com.rfid;
 
+import java.io.File;
+
 import com.thingmagic.*;
 
 public class mainActivity {
@@ -92,10 +94,24 @@ public class mainActivity {
 	        // Read tags
 	        tagReads = r.read(500);
 	        // Print tag reads
+	        String pathname = "/Users/Ben/Desktop/dataoutput.txt";
+			DataWriter datawriter = new DataWriter();
+			String datastring = new String();
+			String yesno = new String();
+			
 	        for (TagReadData tr : tagReads)
 	        {
 	        	double distance = cal.calDistanceByRSSI(tr.getRssi());
-	            System.out.println(tr.toString()+" RSSI: "+tr.getRssi()+"  Distance is :"+distance);
+	            System.out.println(tr.toString()+" RSSI: "+tr.getRssi()+" Dis :"+distance+" Frequency: "+tr.getFrequency()+" Phase: "+tr.getPhase());
+	            
+	            //for collect data
+//	            if(tr.epcString().endsWith("1")|tr.epcString().endsWith("2")|tr.epcString().endsWith("3")){
+//	            	yesno = ",yes \n";
+//	            }else{
+//	            	yesno = ",no \n";
+//	            }
+//	            datastring = tr.getRssi()+","+tr.getFrequency()+","+tr.getPhase()+yesno;
+//				datawriter.DataOutput(pathname, datastring);
 	        }
 
 	        // Shut down reader

@@ -4,15 +4,15 @@ import java.util.Random;
 
 public class Calculater {
 
-	public double calDistanceByRSSI (int RSSI){
+	public static double calDistanceByRSSI (int RSSI){
 		int iRssi = Math.abs(RSSI);  
 		int A;//the path loss at the reference distance 1m,
 		double r;//the path loss exponent; 2.0 in Vacuum, 2.2 in office. (1~5)
 		double distance;// distance in meters
 		double Xg;//a normal (or Gaussian) random variable with zero mean, reflecting the attenuation (in decibel) caused by flat fading
 		Xg = 8.7;
-		A = 51;
-		r = 2.0;
+		A = 53;
+		r = 2.2;
 	    //without Gaussian
 		double power = (iRssi-A)/(10*r);
 		

@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="lib/ltkjava-1.0.0.6.jar"/>
 	<classpathentry kind="lib" path="lib/ltkthingmagic.jar"/>
 	<classpathentry kind="lib" path="lib/mercuryapi.jar"/>
+	<classpathentry kind="lib" path="lib/weka.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
