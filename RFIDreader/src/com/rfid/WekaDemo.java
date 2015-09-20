@@ -150,7 +150,7 @@ public class WekaDemo {
 		Instances data = new Instances(datafile);
 		data.setClassIndex(data.numAttributes() - 1);
  
-		// Do 5-split cross validation
+		// Do 2-split cross validation
 		Instances[][] split = crossValidationSplit(data, 2);
  
 		// Separate split into training and testing arrays

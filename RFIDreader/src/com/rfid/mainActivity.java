@@ -2,6 +2,11 @@ package com.rfid;
 
 import java.io.File;
 
+import weka.core.FastVector;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Attribute;
+
 import com.thingmagic.*;
 
 public class mainActivity {
@@ -91,14 +96,20 @@ public class mainActivity {
 	        SimpleReadPlan plan = new SimpleReadPlan(antennaList, TagProtocol.GEN2, null, null, 1000);
 	        r.paramSet(TMConstants.TMR_PARAM_READ_PLAN, plan);
 	        
-	        // Read tags
-	        tagReads = r.read(500);
-	        // Print tag reads
+	        // for collecting data
 	        String pathname = "/Users/Ben/Desktop/dataoutput.txt";
 			DataWriter datawriter = new DataWriter();
 			String datastring = new String();
 			String yesno = new String();
+			// testing data
+			Instances testinstance = WekaDemo.createInstances();
 			
+			for(int i=0; i<20; i++){
+	              
+			// Read tags
+	        tagReads = r.read(500);
+	        
+			// Print tag reads
 	        for (TagReadData tr : tagReads)
 	        {
 	        	double distance = cal.calDistanceByRSSI(tr.getRssi());
@@ -112,7 +123,18 @@ public class mainActivity {
 //	            }
 //	            datastring = tr.getRssi()+","+tr.getFrequency()+","+tr.getPhase()+yesno;
 //				datawriter.DataOutput(pathname, datastring);
+	            
+	  
+	         
+	            Instance iExample = new Instance(4);
+	            iExample.setValue(0, tr.getRssi());
+	            iExample.setValue(1, tr.getFrequency());
+	            iExample.setValue(2, tr.getPhase());
+	            testinstance.add(iExample);
 	        }
+			}
+	        
+	        WekaDemo.calculateResult(testinstance);
 
 	        // Shut down reader
 	        r.destroy();
