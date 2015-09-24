@@ -21,6 +21,7 @@ import weka.core.Instances;
 import weka.core.Attribute;
  
 public class WekaDemo {
+	
 	public static BufferedReader readDataFile(String filename) {
 		BufferedReader inputReader = null;
  
@@ -43,6 +44,7 @@ public class WekaDemo {
 		return evaluation;
 	}
  
+	//calculate the models accuracy 
 	public static double calculateAccuracy(FastVector predictions) {
 		double correct = 0;
  
@@ -56,6 +58,7 @@ public class WekaDemo {
 		return 100 * correct / predictions.size();
 	}
 	
+	// calculate the final location prediction's accuracy
 	public static void calculateResult(Instances unlabeled) {
 		 // set class attribute
 		 unlabeled.setClassIndex(unlabeled.numAttributes() - 1);
@@ -65,7 +68,7 @@ public class WekaDemo {
 
 		 Classifier clsmodel;
 		try {
-			clsmodel = (Classifier) weka.core.SerializationHelper.read("/Users/Ben/Desktop/permodel.model");
+			clsmodel = (Classifier) weka.core.SerializationHelper.read("src/res/permodel.model");
 			int numyes,numno;
 			 numyes = 0;
 			 numno = 0;
@@ -145,7 +148,7 @@ public class WekaDemo {
 	}
  
 	public static void main(String[] args) throws Exception {
-		BufferedReader datafile = readDataFile("/Users/Ben/Desktop/cell1.arff");
+		BufferedReader datafile = readDataFile("src/res/cell1-training data.arff");
  
 		Instances data = new Instances(datafile);
 		data.setClassIndex(data.numAttributes() - 1);
@@ -190,7 +193,8 @@ public class WekaDemo {
 			System.out.println("Accuracy of " + models[j].getClass().getSimpleName() + ": "
 					+ String.format("%.2f%%", accuracy)
 					+ "\n---------------------------------");
-			
+
+			//this is for recording data to a txt file
 //			String pathname = "/Users/Ben/Desktop/dataoutput.txt";
 //			File writename = new File(pathname); 
 //			writename.createNewFile();
@@ -201,7 +205,7 @@ public class WekaDemo {
 			}
 		 Instances unlabeled = new Instances(
                  new BufferedReader(
-                   new FileReader("/Users/Ben/Desktop/cell1test2.arff")));
+                   new FileReader("src/res/cell1-testdata.arff")));
 
 		 calculateResult(unlabeled);
 	}

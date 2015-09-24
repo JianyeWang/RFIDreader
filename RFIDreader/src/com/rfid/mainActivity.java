@@ -177,6 +177,7 @@ public class mainActivity {
         return antennaList;
     }	
 	
+	// for reading the words in the tag's memory
 	public static void memReadWords(Reader r, String args[])
 	  {
 //	    TagFilter target;
